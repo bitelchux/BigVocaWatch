@@ -1,5 +1,5 @@
-.settings
-.sign
+/.settings
+/.sign
 *.wgt
 .project
 .rds_delta
