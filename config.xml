@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<widget xmlns="http://www.w3.org/ns/widgets" xmlns:tizen="http://tizen.org/ns/widgets" id="http://shimnssso.com/BigVocaWatch" version="1.0.0" viewmodes="maximized">
+    <tizen:application id="0VS0eT7z3S.BigVocaWatch" package="0VS0eT7z3S" required_version="2.3.2"/>
+    <author email="mechurak@gmail.com">Sungho Shim</author>
+    <content src="index.html"/>
+    <description>My digital watch</description>
+    <feature name="http://tizen.org/feature/screen.size.all"/>
+    <icon src="icon.png"/>
+    <name>BigVocaWatch</name>
+    <preference name="level" value="25" readonly="false"/>
+    <tizen:privilege name="http://tizen.org/privilege/filesystem.read"/>
+    <tizen:privilege name="http://tizen.org/privilege/filesystem.write"/>
+    <tizen:profile name="wearable"/>
+</widget>

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+    <meta name="description" content="My Digital Watch" />
+
+    <title>My Digital Watch</title>
+
+    <link rel="stylesheet" type="text/css" href="css/style.css" />
+</head>
+
+<body>
+    <div class="contents">
+        <div class="battery">
+            <p class="subTitle">battery</p>
+            <span id="battery_value">50</span>%
+        </div>
+
+        <div class=walk>
+            <p class="subTitle">walk</p>
+            <span id="walk_value">6000</span>
+        </div>
+
+        <div class=time>
+            <span id="str-hours">09</span>
+            <span id="str-console">:</span>
+            <span id="str-minutes">15</span>
+        </div>
+
+        <div class=word onclick="showConfig()">
+            <p id="str-voca">Hello</p>
+            <p id="str-index" class="subTitle">100</p>
+        </div>
+
+        <div id=config>
+            <form onsubmit="changeLevel()">
+                <input class="btn" type="button" value="<<" onclick="onPrevPrevBtn()">
+                <input class="btn" type="button" value="<" onclick="onPrevBtn()">
+                <input type="text" id="str-level" readonly="readonly">
+				<input class="btn" type="button" value=">" onclick="onNextBtn()">
+                <input class="btn" type="button" value=">>" onclick="onNextNextBtn()">
+                <p>
+                <input class="btn_submit" type="submit" value="submit">
+                </p>
+            </form>
+        </div>
+    </div>
+    <script src="js/main.js"></script>
+</body>
+
+</html>

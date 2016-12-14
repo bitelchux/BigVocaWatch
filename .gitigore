@@ -1,0 +1,7 @@
+.settings
+.sign
+*.wgt
+.project
+.rds_delta
+.sdk_delta.info
+.tproject
