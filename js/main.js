@@ -84,34 +84,43 @@ function showConfig() {
 	divConfig.style.visibility = "visible";
 }
 
-
+const MIN_LEVEL = 5;
+const MAX_LEVEL = 80;
 var strLevel = document.getElementById("str-level");
 var newLevel;
 function onNextBtn() {
 	console.log("onNextBtn");	
 	newLevel = newLevel + 1;
-	if(newLevel > 80) newLevel = 80;
+	if (newLevel > MAX_LEVEL) {
+		newLevel = MAX_LEVEL;
+	}
 	console.log("newLevel: " + newLevel);
 	strLevel.value = newLevel;
 }
 function onPrevBtn() {
 	console.log("onPrevBtn");	
 	newLevel = newLevel - 1;
-	if(newLevel < 5) newLevel = 5;
+	if(newLevel < MIN_LEVEL) {
+		newLevel = MIN_LEVEL;
+	}
 	console.log("newLevel: " + newLevel);
 	strLevel.value = newLevel;
 }
 function onNextNextBtn() {
 	console.log("onNextNextBtn");
 	newLevel = newLevel + 5;
-	if(newLevel > 80) newLevel = 80;
+	if(newLevel > MAX_LEVEL) {
+		newLevel = MAX_LEVEL;
+	}
 	console.log("newLevel: " + newLevel);
 	strLevel.value = newLevel;
 }
 function onPrevPrevBtn() {
 	console.log("onPrevPrevBtn");
 	newLevel = newLevel - 5;
-	if(newLevel < 5) newLevel = 5;
+	if(newLevel < MIN_LEVEL) {
+		newLevel = MIN_LEVEL;
+	}
 	console.log("newLevel: " + newLevel);
 	strLevel.value = newLevel;
 }
