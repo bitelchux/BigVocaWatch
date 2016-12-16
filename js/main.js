@@ -9,6 +9,9 @@ window.onload = function() {
     var spell = [];
     var meaning = [];
     var index = 100;
+    
+    flagRandom = Number(widget.preferences.getItem("random")) ? true : false;
+    console.log("flagRandom: " + flagRandom);
 
     function onSpellFileRead(str) {
         spell = str.split(";");
@@ -62,6 +65,9 @@ window.onload = function() {
 
     var status = 0; // 0: spell, 1: meaning, 2: spell, 3: meaning
     var i = 0;
+    if (flagRandom) {
+    	i = Math.floor(Math.random() * 100);
+    }
     function updateWord() {
         var strVoca = document.getElementById("str-voca");
         var strIndex = document.getElementById("str-index");
@@ -71,15 +77,26 @@ window.onload = function() {
         status++;
         if(status > 3) {
         	status = 0;
-        	i++;
+        	if (flagRandom) {
+        		i = Math.floor(Math.random() * 100);
+        	}
+        	else {
+            	i++;
+        	}
         }
     }
     setInterval(updateWord, 1000);
 };
 
-
+var randomCheckBox = document.getElementById("check-random");
+var flagRandom = false;
 function showConfig() {
 	console.log("showConfig");
+	
+	if (flagRandom) {
+		randomCheckBox.checked = "checked";
+	}
+	
 	var divConfig = document.getElementById("config");
 	divConfig.style.visibility = "visible";
 }
@@ -126,5 +143,16 @@ function onPrevPrevBtn() {
 }
 function changeLevel() {
 	console.log("changeLevel. " + newLevel);
-	widget.preferences.setItem("level", newLevel);	
+	widget.preferences.setItem("level", newLevel);
+	
+	console.log("checked: " + randomCheckBox.checked);
+	
+	if (randomCheckBox.checked == true) {
+		console.log("random checked");
+		widget.preferences.setItem("random", "1");
+	} 
+	else {
+		console.log("random in not checked");
+		widget.preferences.setItem("random", "0");
+	}
 }

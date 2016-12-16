@@ -8,6 +8,7 @@
     <icon src="icon.png"/>
     <name>BigVocaWatch</name>
     <preference name="level" value="25" readonly="false"/>
+    <preference name="random" value="1" readonly="false"/>
     <tizen:privilege name="http://tizen.org/privilege/filesystem.read"/>
     <tizen:privilege name="http://tizen.org/privilege/filesystem.write"/>
     <tizen:profile name="wearable"/>
