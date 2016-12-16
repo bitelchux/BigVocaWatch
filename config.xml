@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <widget xmlns="http://www.w3.org/ns/widgets" xmlns:tizen="http://tizen.org/ns/widgets" id="http://shimnssso.com/BigVocaWatch" version="1.0.0" viewmodes="maximized">
-    <tizen:application id="0VS0eT7z3S.BigVocaWatch" package="0VS0eT7z3S" required_version="2.3.2"/>
+    <tizen:application id="0VS0eT7z3S.BigVocaWatch" package="0VS0eT7z3S" required_version="2.3.2" ambient_support="disable"/>
     <author email="mechurak@gmail.com">Sungho Shim</author>
+    <tizen:category name="http://tizen.org/category/wearable_clock"/>
     <content src="index.html"/>
     <description>My digital watch</description>
     <feature name="http://tizen.org/feature/screen.size.all"/>
@@ -12,4 +13,5 @@
     <tizen:privilege name="http://tizen.org/privilege/filesystem.read"/>
     <tizen:privilege name="http://tizen.org/privilege/filesystem.write"/>
     <tizen:profile name="wearable"/>
+    <tizen:setting background-support="disable" encryption="disable" hwkey-event="enable"/>
 </widget>
