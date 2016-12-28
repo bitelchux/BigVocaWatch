@@ -121,7 +121,7 @@ window.onload = function() {
         );
     }
     updateStep();
-    setInterval(updateBattery, 60000);
+    setInterval(updateStep, 60000);
 };
 
 var randomCheckBox = document.getElementById("check-random");
