@@ -2,14 +2,14 @@ window.onload = function() {
     console.log("onload");
 
     var flagConsole = false;
-    var level = Number(widget.preferences.getItem("level"));    
+    var level = Number(widget.preferences.getItem("level"));
     console.log("level: " + level);
     newLevel = level;
-    strLevel.value = newLevel; 
+    strLevel.value = newLevel;
     var spell = [];
     var meaning = [];
     var index = 100;
-    
+
     flagRandom = Number(widget.preferences.getItem("random")) ? true : false;
     console.log("flagRandom: " + flagRandom);
 
@@ -66,93 +66,115 @@ window.onload = function() {
     var status = 0; // 0: spell, 1: meaning, 2: spell, 3: meaning
     var i = 0;
     if (flagRandom) {
-    	i = Math.floor(Math.random() * 100);
+        i = Math.floor(Math.random() * 100);
     }
+
     function updateWord() {
         var strVoca = document.getElementById("str-voca");
         var strIndex = document.getElementById("str-index");
-        index = (level-1) * 100 +  i;
+        index = (level - 1) * 100 + i;
         strIndex.innerHTML = index;
         strVoca.innerHTML = (status % 2 === 0) ? spell[i] : meaning[i];
         status++;
-        if(status > 3) {
-        	status = 0;
-        	if (flagRandom) {
-        		i = Math.floor(Math.random() * 100);
-        	}
-        	else {
-            	i++;
-        	}
+        if (status > 3) {
+            status = 0;
+            if (flagRandom) {
+                i = Math.floor(Math.random() * 100);
+            } else {
+                i++;
+            }
         }
     }
     setInterval(updateWord, 1000);
+
+    // battery level
+    function updateBattery() {
+        tizen.systeminfo.getPropertyValue(
+            "BATTERY",
+            function(battery) {
+                console.log("The battery level is " + battery.level); // 0 ~ 1
+                var strBattery = document.getElementById("battery_value");
+                strBattery.innerHTML = Math.round(battery.level * 100);
+            },
+            function(error) {
+                console.log("An error occurred " + error.message);
+            }
+        );
+    }
+    updateBattery();
+    setInterval(updateBattery, 60000);
 };
 
 var randomCheckBox = document.getElementById("check-random");
 var flagRandom = false;
+
 function showConfig() {
-	console.log("showConfig");
-	
-	if (flagRandom) {
-		randomCheckBox.checked = "checked";
-	}
-	
-	var divConfig = document.getElementById("config");
-	divConfig.style.visibility = "visible";
+    console.log("showConfig");
+
+    if (flagRandom) {
+        randomCheckBox.checked = "checked";
+    }
+
+    var divConfig = document.getElementById("config");
+    divConfig.style.visibility = "visible";
 }
 
 const MIN_LEVEL = 5;
 const MAX_LEVEL = 80;
 var strLevel = document.getElementById("str-level");
 var newLevel;
+
 function onNextBtn() {
-	console.log("onNextBtn");	
-	newLevel = newLevel + 1;
-	if (newLevel > MAX_LEVEL) {
-		newLevel = MAX_LEVEL;
-	}
-	console.log("newLevel: " + newLevel);
-	strLevel.value = newLevel;
+    console.log("onNextBtn");
+    newLevel = newLevel + 1;
+    if (newLevel > MAX_LEVEL) {
+        newLevel = MAX_LEVEL;
+    }
+    console.log("newLevel: " + newLevel);
+    strLevel.value = newLevel;
 }
+
 function onPrevBtn() {
-	console.log("onPrevBtn");	
-	newLevel = newLevel - 1;
-	if(newLevel < MIN_LEVEL) {
-		newLevel = MIN_LEVEL;
-	}
-	console.log("newLevel: " + newLevel);
-	strLevel.value = newLevel;
+    console.log("onPrevBtn");
+    newLevel = newLevel - 1;
+    if (newLevel < MIN_LEVEL) {
+        newLevel = MIN_LEVEL;
+    }
+    console.log("newLevel: " + newLevel);
+    strLevel.value = newLevel;
 }
+
 function onNextNextBtn() {
-	console.log("onNextNextBtn");
-	newLevel = newLevel + 5;
-	if(newLevel > MAX_LEVEL) {
-		newLevel = MAX_LEVEL;
-	}
-	console.log("newLevel: " + newLevel);
-	strLevel.value = newLevel;
+    console.log("onNextNextBtn");
+    newLevel = newLevel + 5;
+    if (newLevel > MAX_LEVEL) {
+        newLevel = MAX_LEVEL;
+    }
+    console.log("newLevel: " + newLevel);
+    strLevel.value = newLevel;
 }
+
 function onPrevPrevBtn() {
-	console.log("onPrevPrevBtn");
-	newLevel = newLevel - 5;
-	if(newLevel < MIN_LEVEL) {
-		newLevel = MIN_LEVEL;
-	}
-	console.log("newLevel: " + newLevel);
-	strLevel.value = newLevel;
+    console.log("onPrevPrevBtn");
+    newLevel = newLevel - 5;
+    if (newLevel < MIN_LEVEL) {
+        newLevel = MIN_LEVEL;
+    }
+    console.log("newLevel: " + newLevel);
+    strLevel.value = newLevel;
 }
+
 function changeLevel() {
-	console.log("changeLevel. " + newLevel);
-	widget.preferences.setItem("level", newLevel);
-	
-	console.log("checked: " + randomCheckBox.checked);
-	
-	if (randomCheckBox.checked == true) {
-		console.log("random checked");
-		widget.preferences.setItem("random", "1");
-	} 
-	else {
-		console.log("random in not checked");
-		widget.preferences.setItem("random", "0");
-	}
+    console.log("changeLevel. " + newLevel);
+    widget.preferences.setItem("level", newLevel);
+
+    console.log("checked: " + randomCheckBox.checked);
+
+    if (randomCheckBox.checked == true) {
+        console.log("random checked");
+        widget.preferences.setItem("random", "1");
+    } else {
+        console.log("random in not checked");
+        widget.preferences.setItem("random", "0");
+    }
 }
