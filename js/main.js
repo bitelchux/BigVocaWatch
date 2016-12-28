@@ -103,6 +103,25 @@ window.onload = function() {
     }
     updateBattery();
     setInterval(updateBattery, 60000);
+
+    // walk
+    function updateStep() {
+        tizen.humanactivitymonitor.setAccumulativePedometerListener(
+            function(pedometerInfo) {
+                console.log("Step status : " + pedometerInfo.stepStatus);
+                console.log("Speed : " + pedometerInfo.speed);
+                console.log("Walking frequency : " + pedometerInfo.walkingFrequency);
+                console.log("Accumulative total step count : " + pedometerInfo.accumulativeTotalStepCount);
+                var strStep = document.getElementById("walk_value");
+                strStep.innerHTML = pedometerInfo.accumulativeTotalStepCount;
+
+                /* Unregisters a previously registered listener */
+                tizen.humanactivitymonitor.unsetAccumulativePedometerListener();
+            }
+        );
+    }
+    updateStep();
+    setInterval(updateBattery, 60000);
 };
 
 var randomCheckBox = document.getElementById("check-random");
